@@ -41,6 +41,27 @@ public class Node {
         return list
     }
     
+    func postOrder(_ root:Node?) -> [Int] {
+        if root == nil {
+            return []
+        }
+        var stack:[Node] = [Node]()
+        var list = [Int]()
+        stack.append(root!)
+        while !stack.isEmpty {
+            let root = stack.popLast()
+            list.append(root!.val)
+            
+            guard let childern = root?.childern else{
+                return list
+            }
+            for child in childern {
+                stack.append(child)
+            }
+        }
+        return list.reversed()
+    }
+    
 }
 
 
