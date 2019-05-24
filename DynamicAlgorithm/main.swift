@@ -29,8 +29,7 @@ func fib(_ N:Int) -> Int {
     return fib[N]
 }
 
-let fibN = fib(4)
-print(fibN)
+
 
 
 
