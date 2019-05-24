@@ -144,10 +144,32 @@ func midOrderR(_ root:TreeNode?) {
 }
 
 func preOrderR(_ root:TreeNode?) {
+    if  root == nil {
+        return
+    }
     print("root.val =  \(root?.val ?? -1)")
     preOrderR(root?.left)
     preOrderR(root?.right)
     }
+
+func levelOrder(_ root:TreeNode?) {
+    if root == nil {
+        return
+    }
+    
+    var queue = [TreeNode]()
+    queue.append(root!)
+    while !queue.isEmpty {
+        let node =  queue.removeFirst()
+        print("---->node = \(node.val)")
+        if let left = node.left {
+            queue.append(left)
+        }
+        if let right = node.right {
+            queue.append(right)
+        }
+    }
+}
 
 
 
@@ -158,6 +180,7 @@ var h = TreeNode(8, f, g)
 var i = TreeNode(7)
 var A  = TreeNode(5, h, i)
 
-midOrderR(A)
+//midOrderR(A)
+levelOrder(A)
 
 
