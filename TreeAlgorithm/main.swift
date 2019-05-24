@@ -125,6 +125,32 @@ func postOrder(_ root:TreeNode?) {
 }
 
 
+func postOrderR(_ root:TreeNode?) { //后续遍历的递归写法，带R说明是递归写法，
+    if root == nil {
+        return
+    }
+    postOrder(root?.left)
+    postOrder(root?.right)
+    print("root.val =  \(root?.val ?? -1)")
+}
+
+func midOrderR(_ root:TreeNode?) {
+    if root == nil {
+        return
+    }
+    midOrderR(root?.left)
+    print("root.val =  \(root?.val ?? -1)")
+    midOrderR(root?.right)
+}
+
+func preOrderR(_ root:TreeNode?) {
+    print("root.val =  \(root?.val ?? -1)")
+    preOrderR(root?.left)
+    preOrderR(root?.right)
+    }
+
+
+
 var f = TreeNode(6)
 var g = TreeNode(4)
 
@@ -132,6 +158,6 @@ var h = TreeNode(8, f, g)
 var i = TreeNode(7)
 var A  = TreeNode(5, h, i)
 
-postOrder(A)
+midOrderR(A)
 
 
