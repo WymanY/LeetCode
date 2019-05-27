@@ -19,7 +19,7 @@ public class Node {
     }
     
     //循环模式前序遍历
-    /*
+    /*1
      589. N叉树的前序遍历
      https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
      */
