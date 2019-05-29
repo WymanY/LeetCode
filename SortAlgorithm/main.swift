@@ -268,6 +268,22 @@ func countingSort(_ arr:[Int]) -> [Int] {
     return a
 }
 
+/*
+ 9、桶排序（Bucket Sort）
+ 目前先不写桶排序
+ 算法描述
+ 取得数组中的最大数，并取得位数；
+ arr 为原始数组，从最低位开始取每个位组成 radix 数组；
+ 对 radix 进行计数排序（利用计数排序适用于小范围数的特点）；
+ */
+func radixSort(_ arr:[Int]) -> [Int] {
+    var mod = 10
+    var dev = 1
+    return [Int]()
+}
+
+
+
 
 
 var a = [4,6,8,5,9,1,13,7]
