@@ -167,7 +167,9 @@ func parttion(_ arr: inout [Int], _ left:Int, _ right:Int ) -> Int {
     var index = pivoit + 1
     for i in index...right {
         if arr[i] < arr[pivoit] {
-            arr.swapAt(i, index)
+            if i != index {
+                arr.swapAt(i, index)
+            }
             index += 1
         }
     }
@@ -175,10 +177,102 @@ func parttion(_ arr: inout [Int], _ left:Int, _ right:Int ) -> Int {
     return index - 1
 }
 
+/*
+ 堆调整
+ */
+func heapify(_ arr: inout [Int], _ i:Int, _ len:Int) {
+    let left = 2 * i + 1
+    let right = 2 * i + 2
+    var largest = i
+    
+    if left < len && arr[left] > arr[largest] {
+        largest = left
+    }
+    
+    if right < len && arr[right] > arr[largest] {
+        largest = right
+    }
+    if largest != i {
+        arr.swapAt(i, largest)
+        //如果交换了i和larget，可能破坏了底部已经完成的堆排序，重新调整
+        //这里也可以使用非递归的方式进行调整
+        heapify(&arr, largest,len)
+    }
+}
 
-var a = [10,8,9,5,3,11,1,12]
-//let b = mergeSort(a)
-let b = quickSort(&a, 0, a.count-1)
+/*堆调整的非递归方式*/
+func heapify2(_ arr: inout [Int], _ i:Int, _ len:Int) {
+    var  i = i
+    let tmp = arr[i]
+    var k = 2 * i + 1
+    while k < len {
+        if (k + 1) < len && arr[k] < arr[k+1] {
+            k += 1
+        }
+        
+        if arr[k] > tmp {
+            arr[i] = arr[k]
+            i = k
+        } else {
+            break
+        }
+        k = 2 * k + 1
+    }
+    arr [i] = tmp
+}
+
+/*
+ 堆排序
+ */
+func heapSort(_ arr: inout [Int]) -> [Int] {
+    let n = arr.count
+    
+    //找到第一个非叶子节点，然后开始调整。
+    for i in (0...n/2).reversed() {
+        heapify2(&arr, i,n)
+    }
+    print(arr)
+    
+    for i in (0..<arr.count).reversed() {
+        arr.swapAt(0, i)//替换到最后一个元素到堆顶并移除堆顶元素。
+        heapify2(&arr, 0,i)
+    }
+    return arr
+}
+
+
+/*
+ 计算排序。 counting Sort
+ */
+
+func countingSort(_ arr:[Int]) -> [Int] {
+    if arr.count <= 1 {
+        return arr
+    }
+    var a = arr;
+    let maxV = a.max()
+    var bucket = [Int](repeating: 0, count:maxV! + 1)
+    for (_,v) in arr.enumerated() {
+        bucket[v] += 1
+    }
+    
+    var index = 0
+    for (j,v) in bucket.enumerated() {
+        var count = v
+        while count > 0 {
+            a[index] = j
+            index += 1
+            count = count - 1
+        }
+    }
+    return a
+}
+
+
+
+var a = [4,6,8,5,9,1,13,7]
+//let b = quickSort(&a, 0, a.count-1)
+let b = countingSort(a)
 print(b)
 
 
