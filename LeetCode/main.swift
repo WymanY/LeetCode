@@ -198,19 +198,6 @@ func backtrack(_ list:inout [[Int]], nums:[Int], tempList: inout [Int]) {
         tempList.removeLast()
     }
 }
-
-func climbStairs(_ n:Int) -> Int {
-    var dp = [Int](repeatElement(1, count: n+1))
-    dp[1] = 1
-    dp[2] = 2
-    for i in 3...n {
-        dp[i] = dp[i-1] + dp[i-2]
-    }
-    return dp[n]
-}
-
-let y =  climbStairs(3)
-
 func isPalindrome(_ s: String) -> Bool {
     if(s.isEmpty || s.count == 1){return true}
     
@@ -369,9 +356,10 @@ func getRow(_ rowIndex: Int) -> [Int] {
     if rowIndex < 0 {
         return []
     }
-    var ans = [Int](repeating: 1 count: rowIndex + 1)
+//法2：根据组合数公式C(n,i)=n!/(i!*(n-i)!)直接由C(n,i)算C(n,i+1),后者是前者的(n-i)/(i+1)倍
+    var ans = [Int](repeating:1, count: rowIndex + 1)
     for i in 0..<rowIndex {
-        ans[i+1] = ans[i] * (rowIndex - i) /(i + 1)
+        ans[i+1] = ans[i] * (rowIndex - i) / (i + 1)
     }
     return ans
 }
