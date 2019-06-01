@@ -70,7 +70,9 @@ public class Node {
     }
 }
 
-// 添加二叉树的遍历问题
+/*
+ 添加二叉树的遍历问题
+*/
 public class TreeNode {
     var val:Int
     var left:TreeNode?
@@ -199,6 +201,10 @@ func preorderTraversal(_ root:TreeNode?) -> [Int] {
     return list
 }
 
+/*
+ 102. 二叉树的层次遍历
+https://leetcode-cn.com/problems/binary-tree-level-order-traversal/submissions/
+ */
 func levelOrder(_ root:TreeNode?) -> [[Int]] {
     if root == nil {
         return []
@@ -221,7 +227,36 @@ func levelOrder(_ root:TreeNode?) -> [[Int]] {
         list.append(subList)
     }
     return list
-  
+}
+
+/*
+ 637. 二叉树的层平均值
+ https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/
+ */
+
+func averageOfLevels(_ root:TreeNode?) -> [Double] {
+    if root == nil {
+        return []
+    }
+    var result = [Double]()
+    var queue = [TreeNode]()
+    queue.append(root!)
+    while !queue.isEmpty {
+        let levelN = queue.count
+        var sum = 0
+        for _ in 0..<levelN {
+            if let left = queue.first!.left {
+                queue.append(left)
+            }
+            if let right = queue.first!.right {
+                queue.append(right)
+            }
+            let node = queue.removeFirst()
+            sum += node.val
+        }
+        result.append((Double)(sum) / Double(levelN))
+    }
+    return result
 }
 
 
