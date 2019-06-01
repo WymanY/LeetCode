@@ -29,6 +29,36 @@ func fib(_ N:Int) -> Int {
     return fib[N]
 }
 
+/*
+ 264. 丑数 II
+ https://leetcode-cn.com/problems/ugly-number-ii/solution/js-duo-zhi-zhen-ji-bai-liao-9859-de-yong-hu-by-lin/
+ */
+
+func nthUglyNumber(_ n:Int) -> Int {
+    if n <= 1 {
+        return n
+    }
+    var dp = [Int](repeating: 1, count: n)
+    var (t2,t3,t5) = (0,0,0)
+    
+    for i in 1..<n {
+        dp[i] = min(dp[t2] * 2, dp[t3] * 3, dp[t5] * 5)
+        if dp[i] == dp[t2] * 2 {
+            t2 += 1
+        }
+        if dp[i] == dp[t3] * 3 {
+            t3 += 1
+        }
+        if dp[i] == dp[t5] * 5 {
+            t5 += 1
+        }
+    }
+    return dp[n-1]
+}
+
+let c = nthUglyNumber(10)
+print(c)
+
 
 
 

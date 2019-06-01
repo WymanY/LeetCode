@@ -273,3 +273,71 @@ min = stack.getMin()
 print(min)
 
 
+/*
+ 204. 计数质数
+ https://leetcode-cn.com/problems/count-primes/
+ 统计所有小于非负整数 n 的质数的数量。
+ */
+
+func countPrimes(_ n:Int) -> Int {
+    var notPrime = [Bool](repeating: false, count: n)
+    var count = 0
+    for i in 2..<n {
+        if notPrime[i] == false {
+            count += 1
+            var j = 2
+            while j * i < n {
+                notPrime[i * j] = true
+                j += 1
+            }
+        }
+    }
+    return count
+}
+/*
+ 263. 丑数
+ https://leetcode-cn.com/problems/ugly-number/
+ */
+func isUgly(_ num:Int) -> Bool {
+    if num <= 1 {
+        return num == 1
+    }
+    var n = num
+    while n%2 == 0 {
+        n /= 2
+    }
+    while n % 3 == 0 {
+        n /= 3
+    }
+    while n%5 == 0{
+        n /= 5
+    }
+    return n == 1
+}
+
+/*
+ *递归法实现丑数处理
+ */
+func isUglyR(_ num:Int) -> Bool {
+    if num == 0 {
+        return false
+    }
+    if num == 1 {
+        return true
+    }
+    if num % 2 == 0 {
+        return isUglyR(num / 2)
+    }
+    if num % 3 == 0 {
+        return isUglyR(num / 3)
+    }
+    if num % 5 == 0 {
+        return isUglyR(num / 5)
+    }
+    return false
+}
+
+let ans =  countPrimes(10)
+print(ans)
+
+
