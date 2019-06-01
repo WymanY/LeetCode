@@ -360,6 +360,22 @@ func generate(_ numRows:Int) -> [[Int]] {
     return triangle
 }
 
+/*
+ 119. 杨辉三角 II
+https://leetcode-cn.com/problems/pascals-triangle-ii/
+ */
+
+func getRow(_ rowIndex: Int) -> [Int] {
+    if rowIndex < 0 {
+        return []
+    }
+    var ans = [Int](repeating: 1 count: rowIndex + 1)
+    for i in 0..<rowIndex {
+        ans[i+1] = ans[i] * (rowIndex - i) /(i + 1)
+    }
+    return ans
+}
+
 let ans =  countPrimes(10)
 print(ans)
 
