@@ -152,6 +152,30 @@ func preOrderR(_ root:TreeNode?) {
     preOrderR(root?.right)
     }
 
+/*
+ 94. 二叉树的中序遍历
+ https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+ */
+func inorderTraversal(_ root:TreeNode?) -> [Int] {
+    if root == nil {
+        return []
+    }
+    var list = [Int]()
+    var stack = [root!]
+    var cur:TreeNode? = root!.left
+    while cur != nil || !stack.isEmpty {
+        while cur != nil {
+            stack.append(cur!)
+            cur = cur!.left
+        }
+        cur = stack.popLast()
+        list.append(cur!.val)
+        cur = cur!.right
+    }
+    
+    return list
+}
+
 func levelOrder(_ root:TreeNode?) {
     if root == nil {
         return
