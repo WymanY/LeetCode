@@ -337,6 +337,29 @@ func isUglyR(_ num:Int) -> Bool {
     return false
 }
 
+/*
+ 118. 杨辉三角
+ 给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+ */
+func generate(_ numRows:Int) -> [[Int]] {
+    var triangle = [[Int]]()
+    if numRows == 0 {
+        return triangle
+    }
+    triangle.append([1])
+    for rowNum in 1..<numRows {
+        var row = [Int]()
+        let preRow = triangle[rowNum - 1]
+        row.append(1)
+        for j in 1..<rowNum {
+            row.append(preRow[j-1] + preRow[j])
+        }
+        row.append(1)
+        triangle.append(row)
+    }
+    return triangle
+}
+
 let ans =  countPrimes(10)
 print(ans)
 
