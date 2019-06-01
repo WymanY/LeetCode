@@ -40,8 +40,41 @@ func longestPalindrome(_ s:String) -> Int {
     return 2 * count + 1
 }
 
-let n = longestPalindrome("1")
-print(n)
+/*
+ 680. 验证回文字符串 Ⅱ
+ https://leetcode-cn.com/problems/valid-palindrome-ii/
+ */
+
+func validPalindrome(_ s:String) ->Bool {
+    var l  = 0
+    var r =  s.count - 1
+    while l <= r {
+        if (s[s.index(s.startIndex, offsetBy: l)] == s[s.index(s.startIndex, offsetBy: r)]) {
+            l += 1
+            r -= 1
+        } else {
+            return isPalindrome(s, l, r-1) || isPalindrome(s, l+1, r)
+        }
+    }
+    return true
+}
+
+func isPalindrome(_ str:String, _ s:Int, _ t:Int) -> Bool {
+    var s = s
+    var t = t
+    while s <= t {
+        if str[str.index(str.startIndex, offsetBy: s)] == str[str.index(str.startIndex, offsetBy: t)] {
+            s += 1
+            t -= 1
+        } else {
+            return false
+        }
+    }
+    return true
+}
+
+let b =  validPalindrome("tebbem")
+
 
 
 
