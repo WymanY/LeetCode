@@ -176,23 +176,52 @@ func inorderTraversal(_ root:TreeNode?) -> [Int] {
     return list
 }
 
-func levelOrder(_ root:TreeNode?) {
+/*
+ 144. 二叉树的前序遍历
+ https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
+*/
+func preorderTraversal(_ root:TreeNode?) -> [Int] {
     if root == nil {
-        return
+        return []
     }
-    
+    var stack = [TreeNode]()
+    var list = [Int]()
+    var cur = root
+    while cur != nil || !stack.isEmpty  {
+        while cur != nil {
+            stack.append(cur!)
+            list.append(cur!.val)
+            cur = cur!.left
+        }
+        cur = stack.popLast()
+        cur = cur?.right
+    }
+    return list
+}
+
+func levelOrder(_ root:TreeNode?) -> [[Int]] {
+    if root == nil {
+        return []
+    }
     var queue = [TreeNode]()
+    var list = [[Int]]()
     queue.append(root!)
-    while !queue.isEmpty {
-        let node =  queue.removeFirst()
-        print("---->node = \(node.val)")
-        if let left = node.left {
-            queue.append(left)
+    while !queue.isEmpty{
+        let levelNum = queue.count
+        var subList = [Int]()
+        for _ in 0..<levelNum {
+            if let left = queue.first!.left {
+                queue.append(left)
+            }
+            if let right = queue.first!.right {
+                queue.append(right)
+            }
+            subList.append(queue.removeFirst().val)
         }
-        if let right = node.right {
-            queue.append(right)
-        }
+        list.append(subList)
     }
+    return list
+  
 }
 
 
@@ -205,6 +234,8 @@ var i = TreeNode(7)
 var A  = TreeNode(5, h, i)
 
 //midOrderR(A)
-levelOrder(A)
+//levelOrder(A)
+let c =  preorderTraversal(A)
+print(c)
 
 
