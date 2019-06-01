@@ -111,9 +111,17 @@ func reverse(_ head:ListNode?) -> ListNode? {
     }
     return pre
 }
+/*
+ 237. 删除链表中的节点
+ https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
+ */
+
+func deleteNode(_ node:ListNode) {
+    node.val = node.next?.val
+    node.next = node.next?.next
+}
 
 let h = buildListLinkWith([1])
-
 let ans = isPalindrome(h)
 print(ans)
 

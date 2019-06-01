@@ -259,6 +259,34 @@ func averageOfLevels(_ root:TreeNode?) -> [Double] {
     return result
 }
 
+/*
+ 107. 二叉树的层次遍历 II
+ https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/
+ */
+func levelOrderBottom(_ root:TreeNode?) -> [[Int]] {
+    if root == nil {
+        return []
+    }
+    var queue = [TreeNode]()
+    var list = [[Int]]()
+    queue.append(root!)
+    while !queue.isEmpty{
+        let levelNum = queue.count
+        var subList = [Int]()
+        for _ in 0..<levelNum {
+            if let left = queue.first!.left {
+                queue.append(left)
+            }
+            if let right = queue.first!.right {
+                queue.append(right)
+            }
+            subList.append(queue.removeFirst().val)
+        }
+        list.insert(subList, at: 0)
+    }
+    return list
+}
+
 
 
 var f = TreeNode(6)
