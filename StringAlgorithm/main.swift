@@ -88,7 +88,27 @@ func reverseString(_ s:inout [Character]) {
     }
 }
 
-let b =  validPalindrome("tebbem")
+/*
+ 541. 反转字符串 II
+https://leetcode-cn.com/problems/reverse-string-ii/
+ */
+
+func reverseStr2(_ s:String, _ k:Int) -> String {
+    var arr:[Character] = Array(s)
+    let n  = arr.count
+    var i = 0
+    while i < n {//这一题算法不是特别懂，主要是题目没看懂
+        let j = min(i + k - 1, n-1)
+        arr.swapAt(i, j)
+        i += 2 * k
+    }
+    return String(arr)
+}
+
+
+var b =  validPalindrome("tebbem")
+let c = reverseStr2("abcdefg", 2)
+print(c)
 
 
 
