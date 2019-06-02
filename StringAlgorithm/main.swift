@@ -73,6 +73,21 @@ func isPalindrome(_ str:String, _ s:Int, _ t:Int) -> Bool {
     return true
 }
 
+/*
+ 344. 反转字符串
+ https://leetcode-cn.com/problems/reverse-string/
+ */
+
+func reverseString(_ s:inout [Character]) {
+    //翻转字符
+    var (i,j) = (0, s.count - 1)
+    while i < j {
+        s.swapAt(i, j)
+        i += 1
+        j -= 1
+    }
+}
+
 let b =  validPalindrome("tebbem")
 
 
