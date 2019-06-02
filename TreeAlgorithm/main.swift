@@ -287,11 +287,28 @@ func levelOrderBottom(_ root:TreeNode?) -> [[Int]] {
     return list
 }
 
+/*
+ 二叉树的最近公共祖先
+ https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
+ */
+
+func lowestCommonAncestor(_ root:TreeNode?, _ p:TreeNode?, _ q:TreeNode?) -> TreeNode? {
+    if root == nil || p == root || q == root  {
+        return root
+    }
+    
+    let left = lowestCommonAncestor(root?.left, p, q)
+    let right = lowestCommonAncestor(root?.right, p, q)
+    return left == nil ? right : right == nil ? left : root
+}
+
+
+
+
 
 
 var f = TreeNode(6)
 var g = TreeNode(4)
-
 var h = TreeNode(8, f, g)
 var i = TreeNode(7)
 var A  = TreeNode(5, h, i)
