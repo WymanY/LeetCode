@@ -283,6 +283,13 @@ func radixSort(_ arr:[Int]) -> [Int] {
 }
 
 
+func sumOfN(_ n:Int) -> Int {
+    if n == 1 {
+        return 1
+    }
+    return sumOfN(n-1) + n
+}
+
 
 
 

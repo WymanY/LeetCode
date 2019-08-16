@@ -105,10 +105,74 @@ func reverseStr2(_ s:String, _ k:Int) -> String {
     return String(arr)
 }
 
+/*
+ 最长无重复子串，头条面试题碰到过
+ */
+/*
+ 第一种暴力法，存储所有的最长子序列
+ */
+func lenOflongestSubString(chs:[Character]) -> Int {
+    guard !chs.isEmpty else {
+        return 0
+    }
+    
+    var longest:[Character] = [Character]()
+    var curLongest = [Character]()
+    var i = 0
+    while  i < chs.count {
+        var j = i
+        while j < chs.count {
+            if !longest.contains(chs[j]) {
+                longest.append(chs[j])//=>abc
+                j += 1
+                if longest.count > curLongest.count {
+                    curLongest = longest
+                }
+            } else {
+                longest = [Character]()
+            }
+        }
+        i += 1
+    }
+    print(curLongest)
+    return curLongest.count
+}
 
-var b =  validPalindrome("tebbem")
-let c = reverseStr2("abcdefg", 2)
-print(c)
+/*
+ 第二种操作滑动窗口法
+ */
+func lenOflongestSubString2(chs:[Character]) -> Int {
+    guard !chs.isEmpty else {
+        return 0
+    }
+    var set:Set<Character> = Set<Character>()
+    
+    var i = 0
+    var j = 0
+    var ans = 0
+    while i < chs.count && j < chs.count {
+        if set.contains(chs[j]) {
+            set.remove(chs[i])
+            i += 1
+        } else {
+            set.insert(chs[j])
+            j += 1
+            ans = max(ans, j - i)
+        }
+    }
+    
+ return ans
+}
+    
+
+
+
+var str = "abcdgoabcfebd"
+var len =  lenOflongestSubString2(chs: Array(str))
+print(len)
+
+
+
 
 
 
